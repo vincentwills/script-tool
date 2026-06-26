@@ -1,0 +1,1 @@
+Set-TimeZone -Id "FLE Standard Time"
