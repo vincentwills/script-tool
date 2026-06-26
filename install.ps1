@@ -16,3 +16,9 @@ Move-Item -Path $scriptsPath -Destination $dest -Force
 
 Remove-Item $temp -Force
 Remove-Item $extractTemp -Recurse -Force
+
+$action = New-ScheduledTaskAction -Execute "wscript.exe" ` -Argument '-ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Scripts\run_hidden.vbs"'
+$trigger = New-ScheduledTaskTrigger -AtLogOn
+$principal = New-ScheduledTaskPrincipal -GroupId "S-1-5-32-545" -RunLevel Limited
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
+Register-ScheduledTask -TaskName "Scripts" -Action $action -Trigger $trigger -Settings $settings -Description "Executes the scripts without a popup window"
