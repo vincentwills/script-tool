@@ -7,9 +7,6 @@ Invoke-WebRequest -Uri $repoZip -OutFile $temp -UseBasicParsing
 if (Test-Path $extractTemp) { Remove-Item $extractTemp -Recurse -Force }
 Expand-Archive -Path $temp -DestinationPath $extractTemp -Force
 
-if (Test-Path $extractTemp) { Remove-Item $extractTemp -Recurse -Force }
-Expand-Archive -Path $temp -DestinationPath $extractTemp -Force
-
 $scriptsSource = Get-ChildItem -Path $extractTemp -Directory | Select-Object -First 1
 $scriptsPath = Join-Path $scriptsSource.FullName "Scripts"
 
